@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-products-header',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class ProductsHeaderComponent implements OnInit {
+  @Output() columnsCountChange = new EventEmitter<number>();
   sort= 'desc'; // j'initialise l'état de mon bouton de tri
   itemsShowCount=12;
 
@@ -23,7 +24,16 @@ export class ProductsHeaderComponent implements OnInit {
     this.sort = newSort;  
   }
 
+  /**
+   * au click, on sélectionne le nombre d'articles souhaités sur la vue
+   * @param count 
+   */
   onItemsUpdated(count: number): void {
     this.itemsShowCount = count;
   }
+
+  onColumnsUpdated(colsNum: number): void {
+    this.columnsCountChange.emit(colsNum);
+  }
+
 }
