@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 
 })
 export class ProductsHeaderComponent implements OnInit {
-  sort= 'desc'; // j'intiliase l'état de mon bouton
+  sort= 'desc'; // j'initialise l'état de mon bouton de tri
+  itemsShowCount=12;
 
   constructor() { }
 
@@ -14,8 +15,15 @@ export class ProductsHeaderComponent implements OnInit {
     
   }
 
-  onSortUpdated(): void {
-
+  /**
+   * au click , on attribue la nouvelle valeur asc ou desc
+   * @param newSort 
+   */
+  onSortUpdated(newSort: string): void {
+    this.sort = newSort;  
   }
 
+  onItemsUpdated(count: number): void {
+    this.itemsShowCount = count;
+  }
 }
