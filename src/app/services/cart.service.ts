@@ -56,4 +56,6 @@ export class CartService {
     this.cart.next({items : filteredItems}); // on affiche le nouveau tableau obtenu
     this._snackBar.open('1 item has been removed from cart', 'ok', { duration: 3000 });
   }
+
+
 }
