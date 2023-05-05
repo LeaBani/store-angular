@@ -55,4 +55,8 @@ export class CartComponent implements OnInit {
     return this.cartService.getTotal(items); // on reprend la méthode de service
   }
 
+  onClearCart() {
+    this.cartService.onClearCart();
+  }
+
 }
