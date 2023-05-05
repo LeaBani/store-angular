@@ -28,6 +28,11 @@ export class CartService {
     this._snackBar.open( '1 item added to cart.', 'ok', { duration: 3000 }); // on ouvre une modale 
     console.log('update', this.cart.value);
     
+  }
 
+  getTotal(items: Array<CartItem>) : number {
+    return items
+      .map((item) => item.price * item.quantity) // nouveau tableau avec pour chaque item le prix * qté
+      .reduce((prev, current) => prev + current, 0) // nombre précédént + en cours à partir de 0
   }
 }
