@@ -14,23 +14,42 @@ export class CartComponent implements OnInit {
     price: 150,
     quantity: 1,
     id: 1
-  }]};
+  },
+  {
+    product: 'https://via.placeholder.com/150',
+    name: 'snickers',
+    price: 150,
+    quantity: 3,
+    id: 2
+  },
+]};
 
   dataSource: Array<CartItem> = [];
 
   displayedColumns: Array<string> = [
     'product',
-    // 'name',
-    // 'price',
-    // 'quantity',
-    // 'total',
-    // 'action'
+    'name',
+    'price',
+    'quantity',
+    'total',
+    'action'
   ]
 
   constructor() {}
 
   ngOnInit(): void{
     this.dataSource = this.cart.items;
+  }
+
+/**
+ * 
+ * @param items attend un tableau d'items
+ * @returns un nombre
+ */
+  getTotal(items: Array<CartItem>) : number {
+    return items
+      .map((item) => item.price * item.quantity) // nouveau tableau avec pour chaque item le prix * qté
+      .reduce((prev, current) => prev + current, 0) // nombre précédént + en cours à partir de 0
   }
 
 }
