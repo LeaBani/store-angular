@@ -1,9 +1,33 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Cart, CartItem } from '../models/cart.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  // La programmation réactive est un des principes fondamentaux utilisés par le framework Angular. Le principe consiste à utiliser deux types d'objets, les observateurs et les observables. Les premiers observent les derniers et réagissent lorsque la valeur des observables a été modifiée. Cela permet d'avoir une réactivité importante pour une application et plus spécifiquement sur les interfaces graphiques. La classe "BehaviorSubject" est en fait un sous-type de la classe "Subject", qui est un observable. Elle possède donc des spécificités particulières.
 
-  constructor() { }
+  cart = new BehaviorSubject<Cart>({items:[]}) // Requires an initial value and emits the current value to new subscribers
+
+  constructor(private _snackBar: MatSnackBar) { }
+  
+  addToCart(item: CartItem): void {
+    const items = [...this.cart.value.items]; // tableau de tous les items présents dans le panier en cours
+
+    const itemInCart = items.find((_item) => _item.id === item.id)// si un item a déjà ajotué au panier, le "_" permet d'avoir accès à la var dans toute l'appli (scope)
+
+    if (itemInCart) { // si l'item existe déjà dans panier,
+      itemInCart.quantity += 1; // on incrémente 
+    } else {
+      items.push(item); // sinon on ajoute l'item au panier
+    }
+
+    this.cart.next({ items }); // on émet la valeur a tous les composants qui ont souscrits 
+    this._snackBar.open( '1 item added to cart.', 'ok', { duration: 3000 }); // on ouvre une modale 
+    console.log('update', this.cart.value);
+    
+
+  }
 }

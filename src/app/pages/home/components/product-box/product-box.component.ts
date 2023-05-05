@@ -28,7 +28,7 @@ export class ProductBoxComponent implements OnInit {
    * ne retourne rien (void)
    */
   onAddToCart(): void {
-
+    this.addToCard.emit(this.product); // au click, on ajoute le produit au panier
   }
 
 }

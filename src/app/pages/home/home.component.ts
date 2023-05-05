@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
+import { CartService } from 'src/app/services/cart.service';
 
 const ROWS_HEIGHT : { [id:number]: number }= { 1: 400, 3: 335, 4: 350 }; // on défini la hauteur en fonction du nombre d'articles à afficher
 
@@ -13,7 +15,7 @@ export class HomeComponent implements OnInit {
   rowHeight = ROWS_HEIGHT[this.cols]; // hauteur initiale est à 3
   category: string | undefined;
 
-  constructor(){}
+  constructor(private cartService: CartService) {} // on injecte le service créé dans le composant
 
   ngOnInit(): void {
     
@@ -34,7 +36,15 @@ export class HomeComponent implements OnInit {
     this.category = newCategory;
   }
 
-  onAddToCart():void {
+  onAddToCart (product: Product):void { // on importe de l'interface / model Product
+    this.cartService.addToCart({ // on utilise la convention de nommage de l'API pour créer l'objet
+      product: product.image, // on récupère directement toutes les propriétés grace à TypeScript
+      name: product.title, 
+      price: product.price,
+      quantity: 1,
+      id: product.id,
+
+    });
     
   }
 
