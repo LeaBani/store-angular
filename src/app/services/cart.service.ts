@@ -48,4 +48,12 @@ export class CartService {
     this.cart.next({items :[]});
     this._snackBar.open('Cart is cleared.' , 'ok', {duration: 3000})
   }
+
+  removeFromCart(item: CartItem): void {
+    const filteredItems = this.cart.value.items.filter(
+      (_item) => _item.id !== item.id
+      );
+    this.cart.next({items : filteredItems}); // on affiche le nouveau tableau obtenu
+    this._snackBar.open('1 item has been removed from cart', 'ok', { duration: 3000 });
+  }
 }

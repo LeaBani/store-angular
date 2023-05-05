@@ -55,8 +55,12 @@ export class CartComponent implements OnInit {
     return this.cartService.getTotal(items); // on reprend la méthode de service
   }
 
-  onClearCart() {
+  onClearCart() :void {
     this.cartService.onClearCart();
+  }
+
+  onRemoveFromCart(item: CartItem) :void {
+    this.cartService.removeFromCart(item);
   }
 
 }
