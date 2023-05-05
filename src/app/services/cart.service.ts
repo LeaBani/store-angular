@@ -26,13 +26,26 @@ export class CartService {
 
     this.cart.next({ items }); // on émet la valeur a tous les composants qui ont souscrits 
     this._snackBar.open( '1 item added to cart.', 'ok', { duration: 3000 }); // on ouvre une modale 
-    console.log('update', this.cart.value);
+    // console.log('update', this.cart.value);
     
   }
 
+  /**
+   * On cherche à calculer le prix total du panier
+   * @param items 
+   * @returns un nouveau tableau d'items
+   */
   getTotal(items: Array<CartItem>) : number {
     return items
       .map((item) => item.price * item.quantity) // nouveau tableau avec pour chaque item le prix * qté
       .reduce((prev, current) => prev + current, 0) // nombre précédént + en cours à partir de 0
+  }
+
+  /**
+   * On cherche à vider le panier
+   */
+  onClearCart():void {
+    this.cart.next({items :[]});
+    this._snackBar.open('Cart is cleared.' , 'ok', {duration: 3000})
   }
 }

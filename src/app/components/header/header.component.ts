@@ -32,5 +32,12 @@ export class HeaderComponent {
     return this.cartService.getTotal(items); // on reprend la méthode de service
   }
 
+  /**
+   * on utilise la méthode codée dans le cart service pour vider le panier
+   */
+  onClearCart() {
+    this.cartService.onClearCart();
+  }
+
 
 }
