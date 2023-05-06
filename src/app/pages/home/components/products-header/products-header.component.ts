@@ -7,6 +7,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class ProductsHeaderComponent implements OnInit {
   @Output() columnsCountChange = new EventEmitter<number>();
+  @Output() ItemsCountChange = new EventEmitter<number>();
+  @Output() sortChange = new EventEmitter<string>();
   sort= 'desc'; // j'initialise l'état de mon bouton de tri
   itemsShowCount=12;
 
@@ -22,6 +24,7 @@ export class ProductsHeaderComponent implements OnInit {
    */
   onSortUpdated(newSort: string): void {
     this.sort = newSort;  
+    this.sortChange.emit(newSort);
   }
 
   /**
@@ -30,6 +33,7 @@ export class ProductsHeaderComponent implements OnInit {
    */
   onItemsUpdated(count: number): void {
     this.itemsShowCount = count;
+    this.ItemsCountChange.emit(count)
   }
 
   onColumnsUpdated(colsNum: number): void {
