@@ -70,4 +70,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * pour définir la limite lors de l'appel à l'api
+   * @param count 
+   */
+  onItemsCountChange(newCount: number) :void {
+    this.count = newCount.toString();
+    this.getProducts(); // on actualise la méthode
+  }
+
+  onSortChange(newSort: string) : void {
+    this.sort = newSort;
+    this.getProducts(); // on actualise la méthode
+  }
+
 }
