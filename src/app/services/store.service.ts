@@ -18,9 +18,11 @@ export class StoreService {
    * @param sort on trie la recherche
    * @returns la liste des produits de l'Api
    */
-  getAllProducts(limit='12', sort='desc'): Observable<Array<Product>> {
+  getAllProducts(limit='12', sort='desc', category?: string): Observable<Array<Product>> {
     return this.httpClient.get<Array<Product>>(
-      `${STORE_BASE_URL}/products?sort=${sort}&limit=${limit}`
+      `${STORE_BASE_URL}/products${
+        category ? '/category/' + category : '' // sélection optionnelle de la catégorie
+      }?sort=${sort}&limit=${limit}`
     )
 
   }
