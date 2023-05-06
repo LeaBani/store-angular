@@ -7,14 +7,7 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductBoxComponent implements OnInit {
   @Input() fullWidthMode = false; // sur la vue avec 1 seule colonne
-  product: Product | undefined = { // on utilise le product.model
-    id: 1,
-    title: 'Snickers',
-    price: 150,
-    category: 'shoes',
-    description: 'description',
-    image: 'https://via.placeholder.com/150',
-  };
+  @Input() product: Product | undefined; // on rend l'input dynamique
 
   @Output() addToCard = new EventEmitter(); // on récupère cette méthode dans le home component
 
