@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { loadStripe } from '@stripe/stripe-js';
-import { async } from 'rxjs';
 import { CartItem } from 'src/app/models/cart.model';
 import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'environments/environment.development';
 
 @Component({
   selector: 'app-cart',
@@ -81,7 +81,7 @@ export class CartComponent implements OnInit {
     this.http.post('http://localhost:4242/checkout', {
       items: this.cart.items
     }).subscribe(async(res: any) => {
-      let stripe = await loadStripe(`${process.env.STRIPE_PUBLIC_KEY}`);
+      let stripe = await loadStripe(`${environment.apiUrl}`);
       stripe?.redirectToCheckout({
         sessionId: res.id
       })
