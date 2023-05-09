@@ -42,4 +42,11 @@ testem.log
 Thumbs.db
 
 .env
+server/.env
+
 /server/node_modules
+
+src/environments/environment.development.ts
+src/environments/environment.ts
+
+
